@@ -1,16 +1,27 @@
 # LinkedIn Post Draft – GitHub Universe Sponsorship
 
-Friends, builders, and community stewards — I’ve been offered a meaningful chance to improve how we gather online, and I’d love for you to be part of it.
+I'm heading to GitHub Universe to advance research on healthier online communities—and I'm inviting you to co-own the learning.
 
-GitHub Universe asked me to join this year. My current research is all about designing healthier online community spaces: open-source tools that foster belonging, reduce burnout for moderators, and give people rituals that feel human. One longtime collaborator already volunteered to fund the entire flight, but I’d rather turn this into a shared experiment in community-supported research. We co-invest in the learning, and we all absorb the breakthroughs.
+My work right now is laser-focused on designing community infrastructure that actually works: open-source moderation tools that prevent burnout, participation rituals that feel human instead of transactional, and spaces where belonging doesn't require performing. A longtime collaborator already offered to fund the entire trip, but here's why I'm not taking that deal.
 
-Here’s the opportunity:
-- **Deadline is tomorrow**. I need to book the flight, and every percentage pledged today lightens the anchor sponsor’s load.
-- **You get first-look impact.** I’ll deliver a crisp Universe recap focused on community infrastructure, share prototypes and rituals sparked by the conference, and host a private debrief for supporters.
-- **Your name travels with the work.** Every project or paper that emerges from these conversations will credit the people who made the trip possible.
+**Single-sponsor funding keeps research insular. Community-backed research distributes both the risk and the breakthroughs.**
 
-The pledge model is simple: you commit a percentage of the ticket, I only collect once everything is ready to book, and if plans change, no funds move. Consider it a low-risk way to accelerate OSS research into more humane digital spaces.
+When a community co-invests, everyone gets upstream access to the insights. You're not a donor—you're a research partner with early visibility into what gets built next.
 
-If you believe healthy online communities are worth investing in, this is your moment to help shape them. Join the supporter circle here (live progress + all details): https://ilyagulko.com/pledger
+## Here's what happens:
 
-Let’s make this trip—and the insights it unlocks—something the whole community benefits from. DM me if you want to talk through it before pledging. Thank you for considering it, and for everything you already do to make the internet kinder.
+You pledge any percentage of the $556 flight cost (5%, 25%, whatever fits). I collect only when we hit 100%. If we don't, my collaborator covers it anyway—**so your downside is zero, but your upside is direct influence on OSS community tooling.**
+
+## What you get:
+
+- **Immediate conference debrief** for all supporters: key patterns, surprising conversations, and which ideas are ready to prototype
+- **First access** to any tools, frameworks, or documented rituals that emerge from Universe conversations
+- **Credit in perpetuity**: every paper, prototype, or talk that traces back to this trip will acknowledge the people who funded it
+
+The flight books in two days, October 23. Every pledge today means more people have ownership over this research, and more communities benefit from what we learn.
+
+**Join the supporter circle here** (live funding tracker + full details): https://ilyagulko.com/pledger
+
+If you want to talk through the model, specific deliverables, or how your pledge gets used—DM me. I'm especially interested in hearing what community infrastructure problems you'd want me to prioritize in conversations there.
+
+The internet doesn't have to be exhausting. Let's fund the research that makes it sustainable.
