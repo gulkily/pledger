@@ -54,8 +54,12 @@ You should see the updated pledge page with the new storytelling section, smalle
    - Enter a name, valid email, and percentage (e.g., 25) and submit.
    - Confirm the success message appears and the pledge list updates.
    - Verify the email is *not* shown in the pledge list.
-3. **Invalid email**: Try submitting with an invalid email to see the validation error from the backend.
-4. **Normalization**: Add multiple pledges so the raw total exceeds 100%; confirm the chart caps at 100% and the explanatory note appears.
+3. **Manage your pledge**:
+   - Refresh the page; the “Manage your pledges” panel should display your commitment with edit/remove controls.
+   - Change the percentage and name, save, and confirm the chart/list refresh with the new values.
+   - Click *Remove* and ensure the pledge disappears. Check that localStorage stores `pledgerSessionToken` (in DevTools > Application).
+4. **Invalid email**: Try submitting with an invalid email to see the validation error from the backend.
+5. **Normalization**: Add multiple pledges so the raw total exceeds 100%; confirm the chart caps at 100% and the explanatory note appears.
 
 ## 6. Inspect the SQLite database (optional)
 The app stores pledges in `pledges.db`. To inspect it:
