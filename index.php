@@ -113,7 +113,6 @@
 
         .pie-segment:hover {
             opacity: 0.8;
-            stroke-width: 52;
         }
 
         .tooltip {
@@ -144,6 +143,21 @@
             font-weight: bold;
             color: #667eea;
             margin-bottom: 10px;
+        }
+
+        .progress-text.over-goal {
+            color: #4caf50;
+        }
+
+        .goal-badge {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.5em;
+            margin-left: 10px;
+            vertical-align: middle;
         }
 
         .price-range {
@@ -333,7 +347,9 @@
                 </div>
 
                 <div class="chart-info">
-                    <div class="progress-text"><span id="totalPercent">0</span>% Pledged</div>
+                    <div class="progress-text" id="progressText">
+                        <span id="totalPercent">0</span>%
+                    </div>
                     <div class="price-range" id="priceRange">
                         Estimated flight cost: <strong>Loading...</strong>
                     </div>
@@ -388,7 +404,7 @@
         // Load configuration from backend
         async function loadConfig() {
             try {
-                const response = await fetch(`${API_URL}?action=get_config`);
+                const response = await fetch(`${API_URL}?action=get_config&_=${Date.now()}`);
                 const data = await response.json();
                 
                 if (data.success) {
@@ -415,7 +431,7 @@
         // Load pledges from backend
         async function loadPledges() {
             try {
-                const response = await fetch(`${API_URL}?action=get_pledges`);
+                const response = await fetch(`${API_URL}?action=get_pledges&_=${Date.now()}`);
                 const data = await response.json();
                 
                 if (data.success) {
