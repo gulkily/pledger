@@ -3,39 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help Me Get to GitHub Universe!</title>
+    <title>Co-fund Community Research · GitHub Universe Trip</title>
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚀 Fuel a FOSS maintainer’s trip to GitHub Universe</h1>
-            <p>I’m researching healthier online community spaces through open source and need support to keep learning.</p>
+            <h1>🚀 Co-fund research for healthier online communities</h1>
+            <p>I’m heading to GitHub Universe to advance community infrastructure research—and I’d love you to co-own the learning.</p>
         </div>
 
         <div class="story-card">
             <h2>Why this trip matters</h2>
             <p>
-                I build and study free and open source tools that help communities connect, moderate, and grow with less
-                friction. GitHub Universe is where I can learn from other researchers and maintainers experimenting with
-                digital gathering spaces.
+                My current work is laser-focused on open source infrastructure that keeps online communities healthy:
+                humane moderation tooling, participation rituals that feel welcoming, and spaces where belonging doesn’t
+                require performance. GitHub Universe is where I can pressure-test those ideas with other people building in
+                the same direction.
             </p>
             <p>
-                Your pledge funds the flight. In return, I’ll share conference learnings, research notes, prototypes, and
-                practical takeaways with the supporters who make the trip possible—so any benefits from this visit ripple
-                back to the people backing it.
+                A long-time collaborator already offered to pay for the flight, but I’d rather distribute both the risk and
+                the breakthroughs. When the community co-invests, the insights belong to everyone—not just the person who
+                can underwrite a plane ticket.
             </p>
             <p>
-                One long-time collaborator has already stepped up to cover the entire ticket if needed. I’d love to lighten
-                their load and turn this into a shared effort from the community that benefits most from the research.
+                This pledge drive is an experiment in community-supported research: you pledge a percentage today, I only
+                collect if/when we book, and you receive first access to conference notes, prototypes, and rituals that come
+                out of the trip. Your downside is zero; your upside is direct influence on OSS community tooling.
             </p>
             <p>
-                This pledge drive is an experiment in community-supported research: can we fund the learning together and
-                then share whatever insights emerge so everyone gains?
-            </p>
-            <p>
-                Booking deadline is tight, and every percentage pledged brings us closer to liftoff. Thank you for
-                helping me keep meaningful community-focused FOSS work sustainable.
+                Booking deadline is tight, and every percentage pledged today lightens the anchor sponsor’s load. Thank you
+                for backing meaningful, community-focused FOSS research.
             </p>
         </div>
 
@@ -66,7 +64,7 @@
 
                 <div class="chart-info">
                     <div class="supporter-banner">
-                        Community goal: reduce the anchor sponsor’s share from 100% to 40%.
+                        Community goal: shift the anchor sponsor’s share from 100% to 40% so everyone co-owns the outcome.
                     </div>
                     <div class="progress-text">
                         <span id="displayPercent">0</span>% of commitments
@@ -75,7 +73,7 @@
                         Total pledged: 0%
                     </div>
                     <p class="normalization-note" id="normalizationNote" hidden>
-                        Chart shows each pledge as a share of total commitments when promises go beyond 100%.
+                        When commitments climb past 100%, the chart shows each pledge’s share so we can see how the community carries the load.
                     </p>
                     <div class="price-range" id="priceRange">
                         Estimated flight cost: <strong>Loading...</strong>
@@ -92,7 +90,7 @@
                     <div class="form-group">
                         <label for="name">Your Name <span class="field-tag">Public</span></label>
                         <input type="text" id="name" required placeholder="Enter your name">
-                        <p class="helper-text">Displayed on the pledge list so everyone can see who’s backing the trip.</p>
+                        <p class="helper-text">Displayed on the pledge list and credited on any prototypes, talks, or notes that grow from this trip.</p>
                     </div>
 
                     <div class="form-group">
@@ -108,8 +106,8 @@
                             <span>%</span>
                         </div>
                         <div class="helper-text">
-                            Commit to a slice of the final ticket price so we lighten the anchor sponsor’s load. I’ll reach out with
-                            the exact dollar amount before booking.
+                            Commit to any slice of the flight (5%, 25%, whatever fits). I only collect if we book, and the anchor sponsor
+                            backstops the rest—so your risk is zero while your influence is real.
                         </div>
                         <div class="estimate" id="estimate">
                             This will be approximately <strong>$0 - $0</strong>
@@ -118,7 +116,7 @@
 
                     <button type="submit" class="btn" id="submitBtn">Commit My Pledge</button>
                     <div class="success-message" id="successMessage">
-                        Thank you! Your pledge has been recorded. I'll reach out closer to the booking date!
+                        Thank you! You’re part of the supporter circle—I’ll share booking details and research updates soon.
                     </div>
                     <div class="error-message" id="errorMessage"></div>
                 </form>
@@ -129,11 +127,11 @@
             <h2>Questions you might have</h2>
             <div class="faq-item">
                 <h3>When will I actually pay?</h3>
-                <p>I’ll follow up right before booking to confirm your pledge amount based on the final ticket price.</p>
+                <p>I’ll follow up right before booking to confirm your pledge amount based on the final ticket price—no funds move until that moment.</p>
             </div>
             <div class="faq-item">
                 <h3>What happens to the anchor sponsor?</h3>
-                <p>Your pledges reduce what they cover. If we go beyond 100%, I’ll work with them to scale back their contribution.</p>
+                <p>Your pledges reduce what they cover. If we go beyond 100%, they scale back and we collectively decide how to reinvest the surplus.</p>
             </div>
             <div class="faq-item">
                 <h3>What if the trip falls through?</h3>
@@ -141,7 +139,7 @@
             </div>
             <div class="faq-item">
                 <h3>How will supporters benefit?</h3>
-                <p>You’ll receive research notes, prototypes, and practical takeaways from conversations at Universe so your communities benefit too.</p>
+                <p>You’ll receive rapid research notes, prototypes, and practical rituals from Universe conversations—plus ongoing credit in anything that ships.</p>
             </div>
         </div>
     </div>
