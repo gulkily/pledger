@@ -39,7 +39,15 @@
                 </div>
 
                 <div class="chart-info">
-                    <div class="progress-text"><span id="totalPercent">0</span>% Pledged</div>
+                    <div class="progress-text">
+                        <span id="displayPercent">0</span>% of commitments
+                    </div>
+                    <div class="progress-subtext" id="rawTotalText">
+                        Total pledged: 0%
+                    </div>
+                    <p class="normalization-note" id="normalizationNote" hidden>
+                        Chart shows each pledge as a share of total commitments when promises go beyond 100%.
+                    </p>
                     <div class="price-range" id="priceRange">
                         Estimated flight cost: <strong>Loading...</strong>
                     </div>

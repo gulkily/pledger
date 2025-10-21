@@ -89,6 +89,25 @@ body {
     margin-bottom: 10px;
 }
 
+.progress-subtext {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.normalization-note {
+    font-size: 0.9em;
+    color: #5b5bd6;
+    background: #f8f9ff;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.normalization-note[hidden] {
+    display: none;
+}
+
 .price-range {
     font-size: 1.1em;
     color: #666;

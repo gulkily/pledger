@@ -9,6 +9,35 @@ let config = {
 };
 
 let pledges = [];
+let pledgeState = {
+    rawTotal: 0,
+    normalizedLookup: new Map()
+};
+
+function pledgeKey(pledge) {
+    if (pledge && pledge.id !== undefined && pledge.id !== null) {
+        return String(pledge.id);
+    }
+    return `${pledge?.name || 'supporter'}-${pledge?.percentage}-${pledge?.created_at || ''}`;
+}
+
+function recalcPledgeState() {
+    const rawTotal = pledges.reduce((sum, pledge) => {
+        const pct = Number.parseFloat(pledge.percentage);
+        return sum + (Number.isFinite(pct) ? pct : 0);
+    }, 0);
+
+    const normalizedLookup = new Map();
+    if (rawTotal > 0) {
+        pledges.forEach(pledge => {
+            const pct = Number.parseFloat(pledge.percentage);
+            const safePct = Number.isFinite(pct) ? pct : 0;
+            normalizedLookup.set(pledgeKey(pledge), (safePct / rawTotal) * 100);
+        });
+    }
+
+    pledgeState = { rawTotal, normalizedLookup };
+}
 
 function apiUrl(action) {
     const url = new URL(API_BASE_URL, window.location.href);
@@ -51,7 +80,7 @@ async function loadPledges() {
         const data = await response.json();
 
         if (data.success) {
-            pledges = data.pledges;
+            pledges = Array.isArray(data.pledges) ? data.pledges : [];
             updateChart();
             updateSponsorsList();
         }
@@ -79,12 +108,32 @@ function updateCountdown() {
 
 // Update pie chart
 function updateChart() {
-    const total = pledges.reduce((sum, p) => sum + parseFloat(p.percentage), 0);
-    document.getElementById('totalPercent').textContent = total.toFixed(1);
+    recalcPledgeState();
+
+    const { rawTotal } = pledgeState;
+    const displayPercent = rawTotal > 100 ? 100 : rawTotal;
+    const displayPercentEl = document.getElementById('displayPercent');
+    const rawTotalTextEl = document.getElementById('rawTotalText');
+    const noteEl = document.getElementById('normalizationNote');
+
+    if (displayPercentEl) {
+        displayPercentEl.textContent = displayPercent.toFixed(1);
+    }
+
+    if (rawTotalTextEl) {
+        rawTotalTextEl.textContent = `Total pledged: ${rawTotal.toFixed(1)}%`;
+    }
+
+    if (noteEl) {
+        noteEl.hidden = !(rawTotal > 100);
+    }
 
     const circumference = 2 * Math.PI * 100;
-    const progress = Math.min(total / 100, 1) * circumference;
-    document.getElementById('progressCircle').setAttribute('stroke-dasharray', `${progress} ${circumference}`);
+    const progress = Math.min(displayPercent / 100, 1) * circumference;
+    const progressCircle = document.getElementById('progressCircle');
+    if (progressCircle) {
+        progressCircle.setAttribute('stroke-dasharray', `${progress} ${circumference}`);
+    }
 }
 
 // Update sponsors list
@@ -96,15 +145,24 @@ function updateSponsorsList() {
         return;
     }
 
+    // Ensure normalization data is up to date even if called independently
+    recalcPledgeState();
+
+    const { rawTotal, normalizedLookup } = pledgeState;
+
     list.innerHTML = pledges.map(p => {
-        const pct = parseFloat(p.percentage);
+        const pct = Number.parseFloat(p.percentage) || 0;
         const minAmount = Math.round(config.minPrice * pct / 100);
         const maxAmount = Math.round(config.maxPrice * pct / 100);
+        const normalized = normalizedLookup.get(pledgeKey(p));
+        const normalizedText = rawTotal > 100 && Number.isFinite(normalized)
+            ? ` · ${normalized.toFixed(1)}% of commitments`
+            : '';
 
         return `
             <div class="sponsor-item">
                 <span class="sponsor-name">${p.name}</span>
-                <span class="sponsor-amount">${pct}% ($${minAmount} - $${maxAmount})</span>
+                <span class="sponsor-amount">${pct}%${normalizedText} ($${minAmount} - $${maxAmount})</span>
             </div>
         `;
     }).join('');
