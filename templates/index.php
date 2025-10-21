@@ -10,24 +10,32 @@
     <div class="container">
         <div class="header">
             <h1>🚀 Fuel a FOSS maintainer’s trip to GitHub Universe</h1>
-            <p>I’m investing in my open source craft and need community sponsorship to be there.</p>
+            <p>I’m researching healthier online community spaces through open source and need support to keep learning.</p>
         </div>
 
         <div class="story-card">
             <h2>Why this trip matters</h2>
             <p>
-                I build and maintain free and open source software so teams everywhere can ship faster. GitHub Universe
-                is where I can sharpen those skills, collaborate with fellow maintainers, and bring back better tools
-                for everyone.
+                I build and study free and open source tools that help communities connect, moderate, and grow with less
+                friction. GitHub Universe is where I can learn from other researchers and maintainers experimenting with
+                digital gathering spaces.
             </p>
             <p>
-                Your pledge funds the flight. In return, I’ll share conference learnings, prototypes, and practical
-                takeaways with the supporters who make the trip possible—so any benefits from this visit ripple back to
-                the people backing it.
+                Your pledge funds the flight. In return, I’ll share conference learnings, research notes, prototypes, and
+                practical takeaways with the supporters who make the trip possible—so any benefits from this visit ripple
+                back to the people backing it.
+            </p>
+            <p>
+                One long-time collaborator has already stepped up to cover the entire ticket if needed. I’d love to lighten
+                their load and turn this into a shared effort from the community that benefits most from the research.
+            </p>
+            <p>
+                This pledge drive is an experiment in community-supported research: can we fund the learning together and
+                then share whatever insights emerge so everyone gains?
             </p>
             <p>
                 Booking deadline is tight, and every percentage pledged brings us closer to liftoff. Thank you for
-                helping me keep meaningful FOSS work sustainable.
+                helping me keep meaningful community-focused FOSS work sustainable.
             </p>
         </div>
 
@@ -57,6 +65,9 @@
                 </div>
 
                 <div class="chart-info">
+                    <div class="supporter-banner">
+                        Community goal: reduce the anchor sponsor’s share from 100% to 40%.
+                    </div>
                     <div class="progress-text">
                         <span id="displayPercent">0</span>% of commitments
                     </div>
@@ -97,7 +108,8 @@
                             <span>%</span>
                         </div>
                         <div class="helper-text">
-                            Commit to a slice of the final ticket price. I’ll reach out with the exact dollar amount before booking.
+                            Commit to a slice of the final ticket price so we lighten the anchor sponsor’s load. I’ll reach out with
+                            the exact dollar amount before booking.
                         </div>
                         <div class="estimate" id="estimate">
                             This will be approximately <strong>$0 - $0</strong>
@@ -110,6 +122,26 @@
                     </div>
                     <div class="error-message" id="errorMessage"></div>
                 </form>
+            </div>
+        </div>
+
+        <div class="faq-card">
+            <h2>Questions you might have</h2>
+            <div class="faq-item">
+                <h3>When will I actually pay?</h3>
+                <p>I’ll follow up right before booking to confirm your pledge amount based on the final ticket price.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What happens to the anchor sponsor?</h3>
+                <p>Your pledges reduce what they cover. If we go beyond 100%, I’ll work with them to scale back their contribution.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What if the trip falls through?</h3>
+                <p>No funds are collected until the flight is purchased. If plans change, I’ll let everyone know and no pledges will be called in.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How will supporters benefit?</h3>
+                <p>You’ll receive research notes, prototypes, and practical takeaways from conversations at Universe so your communities benefit too.</p>
             </div>
         </div>
     </div>

@@ -101,6 +101,19 @@ body {
     min-width: 250px;
 }
 
+.supporter-banner {
+    background: rgba(255, 255, 255, 0.65);
+    color: #3d3d8a;
+    font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    box-shadow: 0 6px 18px rgba(101, 90, 161, 0.18);
+}
+
 .progress-text {
     font-size: 2em;
     font-weight: bold;
@@ -246,6 +259,45 @@ body {
 .field-tag--private {
     color: #2e7d32;
     background: rgba(76, 175, 80, 0.18);
+}
+
+.faq-card {
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 15px;
+    padding: 30px;
+    margin-top: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+    color: #2f2f2f;
+}
+
+.faq-card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #3d3d8a;
+}
+
+.faq-item {
+    padding: 16px 18px;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 6px 14px rgba(102, 126, 234, 0.12);
+}
+
+.faq-item + .faq-item {
+    margin-top: 18px;
+}
+
+.faq-item h3 {
+    margin: 0 0 6px;
+    font-size: 1.05em;
+    color: #4a4a9f;
+}
+
+.faq-item p {
+    margin: 0;
+    color: #53536a;
+    line-height: 1.5;
 }
 
 .btn {
