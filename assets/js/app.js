@@ -39,6 +39,18 @@ function recalcPledgeState() {
     pledgeState = { rawTotal, normalizedLookup };
 }
 
+function parseLocalDate(value) {
+    if (!value) {
+        return null;
+    }
+    const parts = value.split('-').map(Number);
+    if (parts.length === 3 && parts.every(Number.isFinite)) {
+        const [year, month, day] = parts;
+        return new Date(year, month - 1, day);
+    }
+    return new Date(value);
+}
+
 function apiUrl(action) {
     const url = new URL(API_BASE_URL, window.location.href);
     url.searchParams.set('action', action);
@@ -55,12 +67,13 @@ async function loadConfig() {
         if (data.success) {
             config.minPrice = parseInt(data.config.min_price, 10);
             config.maxPrice = parseInt(data.config.max_price, 10);
-            config.deadline = data.config.deadline;
+           config.deadline = data.config.deadline;
 
             document.getElementById('priceRange').innerHTML =
                 `Estimated flight cost: <strong>$${config.minPrice} - $${config.maxPrice}</strong>`;
+            const deadlineDate = parseLocalDate(config.deadline);
             document.getElementById('deadline').textContent =
-                new Date(config.deadline).toLocaleDateString('en-US', {
+                deadlineDate.toLocaleDateString('en-US', {
                     month: 'long',
                     day: 'numeric',
                     year: 'numeric'
@@ -94,10 +107,10 @@ async function loadPledges() {
 // Calculate countdown
 function updateCountdown() {
     const now = new Date();
-    const deadline = new Date(config.deadline);
+    const deadline = parseLocalDate(config.deadline);
     const diff = deadline - now;
 
-    if (diff > 0) {
+    if (deadline && diff > 0) {
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         document.getElementById('timeLeft').innerHTML = `<strong>${days} days, ${hours} hours remaining</strong>`;
