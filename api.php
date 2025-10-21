@@ -21,9 +21,24 @@ $db->exec('
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         percentage REAL NOT NULL,
+        email TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
 ');
+
+// Ensure legacy databases gain the email column
+$column_check = $db->query('PRAGMA table_info(pledges)');
+$hasEmailColumn = false;
+while ($info = $column_check->fetchArray(SQLITE3_ASSOC)) {
+    if (isset($info['name']) && $info['name'] === 'email') {
+        $hasEmailColumn = true;
+        break;
+    }
+}
+
+if (!$hasEmailColumn) {
+    $db->exec('ALTER TABLE pledges ADD COLUMN email TEXT');
+}
 
 $db->exec('
     CREATE TABLE IF NOT EXISTS config (
@@ -82,28 +97,39 @@ function getPledges($db) {
 
 function addPledge($db) {
     $input = json_decode(file_get_contents('php://input'), true);
-    
+
     $name = trim($input['name'] ?? '');
     $percentage = floatval($input['percentage'] ?? 0);
-    
+    $email = trim($input['email'] ?? '');
+
     // Validation
     if (empty($name)) {
         echo json_encode(['success' => false, 'error' => 'Name is required']);
         return;
     }
-    
+
     if ($percentage <= 0 || $percentage > 100) {
         echo json_encode(['success' => false, 'error' => 'Percentage must be between 1 and 100']);
         return;
     }
-    
+
+    if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo json_encode(['success' => false, 'error' => 'Please enter a valid email address']);
+        return;
+    }
+
     // Sanitize name
     $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
-    
+
     // Insert pledge
-    $stmt = $db->prepare('INSERT INTO pledges (name, percentage) VALUES (:name, :percentage)');
+    $stmt = $db->prepare('INSERT INTO pledges (name, percentage, email) VALUES (:name, :percentage, :email)');
     $stmt->bindValue(':name', $name, SQLITE3_TEXT);
     $stmt->bindValue(':percentage', $percentage, SQLITE3_FLOAT);
+    if (!empty($email)) {
+        $stmt->bindValue(':email', $email, SQLITE3_TEXT);
+    } else {
+        $stmt->bindValue(':email', null, SQLITE3_NULL);
+    }
     
     if ($stmt->execute()) {
         echo json_encode([

@@ -9,8 +9,26 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚀 Help Me Get to GitHub Universe!</h1>
-            <p>I've been invited to attend - help sponsor my flight!</p>
+            <h1>🚀 Fuel a FOSS maintainer’s trip to GitHub Universe</h1>
+            <p>I’m investing in my open source craft and need community sponsorship to be there.</p>
+        </div>
+
+        <div class="story-card">
+            <h2>Why this trip matters</h2>
+            <p>
+                I build and maintain free and open source software so teams everywhere can ship faster. GitHub Universe
+                is where I can sharpen those skills, collaborate with fellow maintainers, and bring back better tools
+                for everyone.
+            </p>
+            <p>
+                Your pledge funds the flight. In return, I’ll share conference learnings, prototypes, and practical
+                takeaways with the supporters who make the trip possible—so any benefits from this visit ripple back to
+                the people backing it.
+            </p>
+            <p>
+                Booking deadline is tight, and every percentage pledged brings us closer to liftoff. Thank you for
+                helping me keep meaningful FOSS work sustainable.
+            </p>
         </div>
 
         <div class="countdown">
@@ -61,15 +79,25 @@
                 <h2>Make a Pledge</h2>
                 <form id="pledgeForm">
                     <div class="form-group">
-                        <label for="name">Your Name</label>
+                        <label for="name">Your Name <span class="field-tag">Public</span></label>
                         <input type="text" id="name" required placeholder="Enter your name">
+                        <p class="helper-text">Displayed on the pledge list so everyone can see who’s backing the trip.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Contact Email <span class="field-tag field-tag--private">Private</span></label>
+                        <input type="email" id="email" placeholder="you@example.com">
+                        <p class="helper-text">Only Ilya sees this—used to coordinate payment details and follow up after the conference.</p>
                     </div>
 
                     <div class="form-group">
                         <label for="percentage">Pledge Percentage</label>
                         <div class="percentage-input">
-                            <input type="number" id="percentage" min="1" max="100" required placeholder="Enter percentage">
+                            <input type="number" id="percentage" min="1" max="100" required placeholder="10">
                             <span>%</span>
+                        </div>
+                        <div class="helper-text">
+                            Commit to a slice of the final ticket price. I’ll reach out with the exact dollar amount before booking.
                         </div>
                         <div class="estimate" id="estimate">
                             This will be approximately <strong>$0 - $0</strong>

@@ -170,6 +170,8 @@ function updateSponsorsList() {
 
 // Update estimate
 const percentageInput = document.getElementById('percentage');
+const emailInput = document.getElementById('email');
+
 percentageInput.addEventListener('input', function () {
     const pct = parseFloat(this.value) || 0;
     const minAmount = Math.round(config.minPrice * pct / 100);
@@ -194,6 +196,7 @@ document.getElementById('pledgeForm').addEventListener('submit', async function 
 
     const name = document.getElementById('name').value;
     const percentage = parseFloat(document.getElementById('percentage').value);
+    const email = emailInput ? emailInput.value.trim() : '';
 
     try {
         const response = await fetch(apiUrl('add_pledge'), {
@@ -201,7 +204,7 @@ document.getElementById('pledgeForm').addEventListener('submit', async function 
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name, percentage }),
+            body: JSON.stringify({ name, percentage, email }),
             cache: 'no-store'
         });
 

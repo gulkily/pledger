@@ -58,6 +58,25 @@ body {
     margin-bottom: 20px;
 }
 
+.story-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 25px 30px;
+    margin-bottom: 25px;
+    color: #2f2f2f;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+}
+
+.story-card h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #3d3d8a;
+}
+
+.story-card p + p {
+    margin-top: 12px;
+}
+
 .chart-container {
     display: flex;
     gap: 30px;
@@ -186,7 +205,9 @@ body {
 }
 
 .percentage-input input {
-    flex: 1;
+    flex: none;
+    width: 110px;
+    text-align: right;
 }
 
 .percentage-input span {
@@ -201,6 +222,30 @@ body {
     border-radius: 8px;
     margin-top: 10px;
     color: #555;
+}
+
+.helper-text {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 8px;
+}
+
+.field-tag {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 6px;
+    font-size: 0.75em;
+    font-weight: 600;
+    color: #3f3fb0;
+    background: rgba(102, 126, 234, 0.16);
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.field-tag--private {
+    color: #2e7d32;
+    background: rgba(76, 175, 80, 0.18);
 }
 
 .btn {
