@@ -84,6 +84,56 @@
             transform: rotate(-90deg);
         }
 
+        .chart-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .chart-center-percentage {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            line-height: 1;
+        }
+
+        .chart-center-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .pie-segment {
+            transition: opacity 0.3s, stroke-width 0.3s;
+            cursor: pointer;
+        }
+
+        .pie-segment:hover {
+            opacity: 0.8;
+            stroke-width: 52;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 1000;
+            white-space: nowrap;
+        }
+
+        .tooltip.show {
+            opacity: 1;
+        }
+
         .chart-info {
             flex: 1;
             min-width: 250px;
@@ -267,21 +317,19 @@
         <div class="card">
             <div class="chart-container">
                 <div class="pie-chart">
-                    <svg width="250" height="250" viewBox="0 0 250 250">
+                    <svg width="250" height="250" viewBox="0 0 250 250" id="pieChartSvg">
+                        <!-- Background circle -->
                         <circle cx="125" cy="125" r="100" fill="#f0f0f0"/>
-                        <circle id="progressCircle" cx="125" cy="125" r="100" 
-                                fill="none" 
-                                stroke="url(#gradient)" 
-                                stroke-width="50"
-                                stroke-dasharray="0 628.32"
-                                style="transition: stroke-dasharray 0.5s ease"/>
-                        <defs>
-                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
+                        <!-- Segments will be added here dynamically -->
+                        <g id="segmentsContainer"></g>
+                        <!-- Inner circle for donut effect -->
+                        <circle cx="125" cy="125" r="70" fill="white"/>
                     </svg>
+                    <div class="chart-center">
+                        <div class="chart-center-percentage"><span id="totalPercent">0</span>%</div>
+                        <div class="chart-center-label">Pledged</div>
+                    </div>
+                    <div class="tooltip" id="tooltip"></div>
                 </div>
 
                 <div class="chart-info">
@@ -397,14 +445,83 @@
             }
         }
 
-        // Update pie chart
+        // Generate colors for pie segments
+        function generateColor(index, total) {
+            // Create a harmonious color palette based on the main gradient
+            const hues = [
+                260, // Purple (main)
+                240, // Blue-purple
+                220, // Blue
+                280, // Violet
+                200, // Cyan-blue
+                300, // Magenta
+                180, // Cyan
+                320, // Pink-purple
+            ];
+            
+            const hue = hues[index % hues.length];
+            const saturation = 70 + (index % 3) * 10;
+            const lightness = 55 + (index % 4) * 5;
+            
+            return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+        }
+
+        // Update pie chart with segments
         function updateChart() {
             const total = pledges.reduce((sum, p) => sum + parseFloat(p.percentage), 0);
             document.getElementById('totalPercent').textContent = total.toFixed(1);
             
-            const circumference = 2 * Math.PI * 100;
-            const progress = Math.min(total / 100, 1) * circumference;
-            document.getElementById('progressCircle').setAttribute('stroke-dasharray', `${progress} ${circumference}`);
+            const container = document.getElementById('segmentsContainer');
+            container.innerHTML = '';
+            
+            if (pledges.length === 0) {
+                return;
+            }
+            
+            const radius = 100;
+            const circumference = 2 * Math.PI * radius;
+            let currentOffset = 0;
+            
+            pledges.forEach((pledge, index) => {
+                const percentage = parseFloat(pledge.percentage);
+                const segmentLength = (percentage / 100) * circumference;
+                const color = generateColor(index, pledges.length);
+                
+                // Create SVG circle segment
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', '125');
+                circle.setAttribute('cy', '125');
+                circle.setAttribute('r', radius);
+                circle.setAttribute('fill', 'none');
+                circle.setAttribute('stroke', color);
+                circle.setAttribute('stroke-width', '50');
+                circle.setAttribute('stroke-dasharray', `${segmentLength} ${circumference}`);
+                circle.setAttribute('stroke-dashoffset', -currentOffset);
+                circle.setAttribute('class', 'pie-segment');
+                circle.style.transition = 'all 0.5s ease';
+                
+                // Add hover effects
+                const tooltip = document.getElementById('tooltip');
+                circle.addEventListener('mouseenter', (e) => {
+                    const minAmount = Math.round(config.minPrice * percentage / 100);
+                    const maxAmount = Math.round(config.maxPrice * percentage / 100);
+                    tooltip.innerHTML = `<strong>${pledge.name}</strong><br>${percentage}% (${minAmount} - ${maxAmount})`;
+                    tooltip.classList.add('show');
+                });
+                
+                circle.addEventListener('mousemove', (e) => {
+                    const rect = e.target.getBoundingClientRect();
+                    tooltip.style.left = (e.clientX - rect.left + 15) + 'px';
+                    tooltip.style.top = (e.clientY - rect.top - 15) + 'px';
+                });
+                
+                circle.addEventListener('mouseleave', () => {
+                    tooltip.classList.remove('show');
+                });
+                
+                container.appendChild(circle);
+                currentOffset += segmentLength;
+            });
         }
 
         // Update sponsors list
