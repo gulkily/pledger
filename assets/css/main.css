@@ -241,6 +241,86 @@ a {
     margin-top: 10px;
 }
 
+.story-explore {
+    margin-top: 20px;
+}
+
+.story-explore h3 {
+    margin: 0 0 10px;
+    font-size: 1.1em;
+    color: var(--color-text);
+}
+
+.story-explore ul {
+    list-style: disc;
+    margin-left: 20px;
+    color: var(--color-text-subtle);
+    line-height: 1.5;
+}
+
+.research-card {
+    background: var(--color-surface);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--color-shadow);
+    color: var(--color-text);
+}
+
+.research-card h2 {
+    margin: 0 0 16px;
+    font-size: 1.35em;
+}
+
+.research-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.research-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.research-title {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.research-tags {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.research-tags span {
+    font-size: 0.8em;
+    font-weight: 600;
+    color: var(--color-accent);
+    background: var(--color-accent-soft);
+    border-radius: 999px;
+    padding: 2px 8px;
+    letter-spacing: 0.04em;
+}
+
+.research-card p {
+    margin: 0;
+    color: var(--color-text-subtle);
+    line-height: 1.5;
+}
+
+.research-links {
+    margin-top: 18px;
+    font-size: 0.95em;
+    color: var(--color-text-subtle);
+}
+
 .chart-container {
     display: flex;
     gap: 30px;

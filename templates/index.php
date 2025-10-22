@@ -51,6 +51,53 @@
                 Booking deadline is tight, and every percentage pledged today lightens the anchor sponsor’s load. Thank you
                 for backing meaningful, community-focused FOSS research.
             </p>
+            <div class="story-explore">
+                <h3>What I’m exploring</h3>
+                <ul>
+                    <li>Designing consent-first social spaces where people control their identity, data, and moderation tools.</li>
+                    <li>Building mutual-support tooling that respects context—whether a prayer circle or any community that cares for its members.</li>
+                    <li>Experimenting with human-guided AI helpers that stay portable, auditable, and grounded in community intent.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="research-card">
+            <h2>Current experiments</h2>
+            <ul class="research-list">
+                <li>
+                    <span class="research-title">Pollyanna</span>
+                    <span class="research-tags">
+                        <span>#consent-first</span>
+                        <span>#accessibility</span>
+                    </span>
+                    <p>Framework for resilient online communities that keeps identities portable, content verifiable, and access universal.</p>
+                </li>
+                <li>
+                    <span class="research-title">PrayerLift / ThyWill</span>
+                    <span class="research-tags">
+                        <span>#mutual-care</span>
+                        <span>#ai-assistive</span>
+                    </span>
+                    <p>Respectful AI-generated responses for support networks—useful case studies for any group practicing empathic check-ins.</p>
+                </li>
+                <li>
+                    <span class="research-title">Prayer Record Text Format</span>
+                    <span class="research-tags">
+                        <span>#portable-data</span>
+                        <span>#community-archives</span>
+                    </span>
+                    <p>Human-readable, git-friendly specification for tracking support activity so communities can own their history.</p>
+                </li>
+                <li>
+                    <span class="research-title">ARKOS (contributor)</span>
+                    <span class="research-tags">
+                        <span>#local-llm</span>
+                        <span>#memory</span>
+                    </span>
+                    <p>Interface for locally hosted, memory-augmented AI agents—informing how we keep automated helpers accountable to users.</p>
+                </li>
+            </ul>
+            <p class="research-links">Want to dive deeper? Explore the projects on <a href="https://github.com/ilyagulko" target="_blank" rel="noreferrer">GitHub</a> or reach out for collaboration notes.</p>
         </div>
 
         <div class="countdown">
@@ -163,6 +210,10 @@
             <div class="faq-item">
                 <h3>What if my situation changes?</h3>
                 <p>This is a trust-based collaboration. If life shifts—expenses pop up, you get cold feet, or the final number feels heavy—let me know. I won’t auto-charge or chase anyone; we’ll adjust the pledge or hand it back to the anchor sponsor.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is this only for faith communities?</h3>
+                <p>Faith circles are one of the labs where these tools are stress-tested, but the patterns—consent-first identity, respectful AI, resilient archives—apply to any group trying to treat people well. The research is open-source and reusable.</p>
             </div>
             <div class="faq-item">
                 <h3>What happens to the anchor sponsor?</h3>
