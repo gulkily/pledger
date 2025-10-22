@@ -486,7 +486,8 @@ async function handleManageFormSubmit(event) {
 }
 
 async function handleManageDeleteClick(event) {
-    const pledgeId = parseInt(event.currentTarget.dataset.pledgeId, 10);
+    const target = event.currentTarget;
+    const pledgeId = parseInt(target?.dataset?.pledgeId, 10);
     if (!Number.isInteger(pledgeId) || pledgeId <= 0) {
         setManageMessage('error', 'Unable to determine which pledge to remove.');
         return;
@@ -497,7 +498,9 @@ async function handleManageDeleteClick(event) {
         return;
     }
 
-    event.currentTarget.disabled = true;
+    if (target) {
+        target.disabled = true;
+    }
     setManageMessage('info', 'Removing pledge...');
 
     try {
@@ -521,7 +524,9 @@ async function handleManageDeleteClick(event) {
         console.error('Error deleting pledge:', error);
         setManageMessage('error', 'Something went wrong while removing the pledge.');
     } finally {
-        event.currentTarget.disabled = false;
+        if (target) {
+            target.disabled = false;
+        }
     }
 }
 
