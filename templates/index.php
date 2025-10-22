@@ -166,7 +166,7 @@
             </div>
             <div class="faq-item">
                 <h3>What happens to the anchor sponsor?</h3>
-                <p>Your pledges reduce what they cover. If we go beyond 100%, they scale back and we collectively decide how to reinvest the surplus.</p>
+                <p>Your pledges reduce what they cover. If we go beyond 100%, the amounts are adjusted proportionally.</p>
             </div>
             <div class="faq-item">
                 <h3>What if the trip falls through?</h3>
