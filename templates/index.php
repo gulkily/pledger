@@ -97,7 +97,10 @@
                     <p>Interface for locally hosted, memory-augmented AI agents—informing how we keep automated helpers accountable to users.</p>
                 </li>
             </ul>
+            <p class="research-links">Want to dive deeper? Explore the projects on <a href="https://github.com/gulkily" target="_blank" rel="noreferrer">GitHub</a> or reach out for collaboration notes.</p>
         </div>
+
+        <a class="btn mobile-cta" href="#pledgeForm">Commit My Pledge</a>
 
         <div class="countdown">
             Need to book by: <strong id="deadline">Loading...</strong>
