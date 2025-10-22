@@ -125,7 +125,7 @@
                     <div class="form-group">
                         <label for="percentage">Pledge Percentage</label>
                         <div class="percentage-input">
-                            <input type="number" id="percentage" min="1" max="100" required placeholder="10">
+                            <input type="number" id="percentage" min="1" max="100" required placeholder="e.g., 10">
                             <span>%</span>
                         </div>
                         <div class="helper-text">
