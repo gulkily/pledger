@@ -1,0 +1,8 @@
+Hi {Name},
+
+I’m about to publish a pledge page for funding my GitHub Universe trip. Because you know the work I’m doing—consent-first community tooling, PrayerLift experiments, and Pollyanna—I’d value your feedback before I post it widely.
+
+Would you mind giving https://ilyagulko.com/pledger a quick read and telling me if anything feels unclear or heavy? Don’t worry about pledging; I’m just pressure-testing the story.
+
+Thank you!
+Ilya

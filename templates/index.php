@@ -97,7 +97,7 @@
                     <p>Interface for locally hosted, memory-augmented AI agents—informing how we keep automated helpers accountable to users.</p>
                 </li>
             </ul>
-            <p class="research-links">Want to dive deeper? Explore the projects on <a href="https://github.com/ilyagulko" target="_blank" rel="noreferrer">GitHub</a> or reach out for collaboration notes.</p>
+            <p class="research-links">Want to dive deeper? Explore the projects on <a href="https://github.com/gulkily" target="_blank" rel="noreferrer">GitHub</a> or reach out for collaboration notes.</p>
         </div>
 
         <div class="countdown">
@@ -197,11 +197,11 @@
             <h2>Questions you might have</h2>
             <div class="faq-item">
                 <h3>How do I update or cancel my pledge?</h3>
-                <p>As long as you revisit from this browser, you’ll see manage buttons to edit or remove your pledge. If you lose access (cleared storage, new device), reply to the follow-up email and I’ll handle it manually.</p>
+                <p>As long as you revisit from this browser, you’ll see manage buttons to edit or remove your pledge. If you lose access (cleared storage, new device), just DM or email me.</p>
             </div>
             <div class="faq-item">
                 <h3>When will I actually pay?</h3>
-                <p>I’ll follow up right before booking to confirm your pledge amount based on the final ticket price—no funds move until that moment.</p>
+                <p>I’ll follow up right before booking to confirm your pledge amount based on the final ticket price.</p>
             </div>
             <div class="faq-item">
                 <h3>Is there an automated checkout?</h3>
