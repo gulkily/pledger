@@ -10,7 +10,7 @@
     <div class="container">
         <div class="hero">
             <div class="hero-avatar">
-                <img src="image/1530699.jpeg" alt="Ilya Gulko">
+                <a href="https://github.com/gulkily" target="_blank" rel="noreferrer"><img src="image/1530699.jpeg" alt="Ilya Gulko"></a>
             </div>
             <div class="hero-content">
                 <div class="hero-header">
@@ -97,7 +97,6 @@
                     <p>Interface for locally hosted, memory-augmented AI agents—informing how we keep automated helpers accountable to users.</p>
                 </li>
             </ul>
-            <p class="research-links">Want to dive deeper? Explore the projects on <a href="https://github.com/gulkily" target="_blank" rel="noreferrer">GitHub</a> or reach out for collaboration notes.</p>
         </div>
 
         <div class="countdown">
