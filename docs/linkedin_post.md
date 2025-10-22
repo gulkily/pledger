@@ -25,3 +25,5 @@ The flight books in two days, October 23. Every pledge today means more people h
 If you want to talk through the model, specific deliverables, or how your pledge gets used—DM me. I'm especially interested in hearing what community infrastructure problems you'd want me to prioritize in conversations there.
 
 The internet doesn't have to be exhausting. Let's fund the research that makes it sustainable.
+
+You can see the source for this experimental campaign here: https://www.github.com/gulkily/pledger
