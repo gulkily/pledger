@@ -20,7 +20,7 @@
                         <span id="themeToggleLabel">Auto</span>
                     </button>
                 </div>
-                <p class="hero-tagline">I’m heading to GitHub Universe to advance community infrastructure research—and I’d love you to co-own the learning.</p>
+                <p class="hero-tagline">I’m heading to <a href="https://githubuniverse.com/">GitHub Universe</a> to advance community infrastructure research—and I’d love you to co-own the learning.</p>
                 <p class="hero-subtext">Your pledge lightens a single sponsor’s load and keeps the insights we uncover open to everyone.</p>
             </div>
         </div>
