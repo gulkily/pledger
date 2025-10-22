@@ -34,7 +34,7 @@
                 the same direction.
             </p>
             <p>
-                A long-time collaborator already offered to pay for the flight, but I’d rather distribute both the risk and
+                An existing collaborator already offered to pay for the flight, but I’d rather distribute both the risk and
                 the breakthroughs. When the community co-invests, the insights belong to everyone—not just the person who
                 can underwrite a plane ticket.
             </p>
