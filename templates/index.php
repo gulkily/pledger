@@ -157,6 +157,10 @@
                 <p>I’ll follow up right before booking to confirm your pledge amount based on the final ticket price—no funds move until that moment.</p>
             </div>
             <div class="faq-item">
+                <h3>Is there an automated checkout?</h3>
+                <p>Not this time. This sprint is deliberately lightweight and last-minute, so once we hit 100% I’ll reach out personally with a payment link or transfer instructions. Think of it as a manually orchestrated experiment rather than a SaaS flow.</p>
+            </div>
+            <div class="faq-item">
                 <h3>What happens to the anchor sponsor?</h3>
                 <p>Your pledges reduce what they cover. If we go beyond 100%, they scale back and we collectively decide how to reinvest the surplus.</p>
             </div>
