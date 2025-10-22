@@ -32,6 +32,10 @@
                 out of the trip. Your downside is zero; your upside is direct influence on OSS community tooling.
             </p>
             <p>
+                You’ll be able to edit or cancel your pledge later from this browser—keep the tab bookmarked and the session
+                remembers you for future supporter-only experiments.
+            </p>
+            <p>
                 Booking deadline is tight, and every percentage pledged today lightens the anchor sponsor’s load. Thank you
                 for backing meaningful, community-focused FOSS research.
             </p>
@@ -84,6 +88,13 @@
                 </div>
             </div>
 
+            <div class="manage-section" id="manageSection" hidden>
+                <h2>Manage your pledges</h2>
+                <p class="helper-text">This device keeps your session so you can adjust or remove pledges later. Clearing cookies or storage removes quick access—just reach out if you ever need a manual change.</p>
+                <div class="manage-message" id="manageMessage" hidden></div>
+                <div id="manageList"></div>
+            </div>
+
             <div class="form-section">
                 <h2>Make a Pledge</h2>
                 <form id="pledgeForm">
@@ -125,6 +136,10 @@
 
         <div class="faq-card">
             <h2>Questions you might have</h2>
+            <div class="faq-item">
+                <h3>How do I update or cancel my pledge?</h3>
+                <p>As long as you revisit from this browser, you’ll see manage buttons to edit or remove your pledge. If you lose access (cleared storage, new device), reply to the follow-up email and I’ll handle it manually.</p>
+            </div>
             <div class="faq-item">
                 <h3>When will I actually pay?</h3>
                 <p>I’ll follow up right before booking to confirm your pledge amount based on the final ticket price—no funds move until that moment.</p>
