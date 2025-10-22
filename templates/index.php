@@ -166,7 +166,7 @@
             </div>
             <div class="faq-item">
                 <h3>What happens to the anchor sponsor?</h3>
-                <p>Your pledges reduce what they cover. If we go beyond 100%, the amounts are adjusted proportionally.</p>
+                <p>Your pledges shrink their commitment. If we push past 100%, I’ll scale everyone’s share down proportionally so the anchor—and every supporter—only pays what’s still needed.</p>
             </div>
             <div class="faq-item">
                 <h3>What if the trip falls through?</h3>
