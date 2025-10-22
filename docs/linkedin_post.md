@@ -2,7 +2,7 @@
 
 I'm heading to GitHub Universe to advance research on healthier online communities—and I'm inviting you to co-own the learning.
 
-My work right now is laser-focused on designing community infrastructure that actually works: open-source moderation tools that prevent burnout, participation rituals that feel human instead of transactional, and spaces where belonging doesn't require performing. A longtime collaborator already offered to fund the entire trip, but here's why I'm not taking that deal.
+My work right now is focused on designing community infrastructure that actually works: open-source moderation tools that prevent burnout, participation rituals that feel human instead of transactional, and spaces where belonging doesn't require performing. A collaborator already offered to fund the entire trip, but here's why I'm not taking that deal.
 
 **Single-sponsor funding keeps research insular. Community-backed research distributes both the risk and the breakthroughs.**
 
