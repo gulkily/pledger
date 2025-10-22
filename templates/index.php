@@ -13,7 +13,13 @@
                 <img src="image/1530699.jpeg" alt="Ilya Gulko">
             </div>
             <div class="hero-content">
-                <h1>Co-fund research for healthier online communities</h1>
+                <div class="hero-header">
+                    <h1>Co-fund research for healthier online communities</h1>
+                    <button type="button" id="themeToggle" class="theme-toggle" aria-label="Toggle color theme" data-theme-state="auto">
+                        <span id="themeToggleIcon">🌓</span>
+                        <span id="themeToggleLabel">Auto</span>
+                    </button>
+                </div>
                 <p class="hero-tagline">I’m heading to GitHub Universe to advance community infrastructure research—and I’d love you to co-own the learning.</p>
                 <p class="hero-subtext">Your pledge lightens a single sponsor’s load and keeps the insights we uncover open to everyone.</p>
             </div>
@@ -56,8 +62,8 @@
             <div class="chart-container">
                 <div class="pie-chart">
                     <svg width="250" height="250" viewBox="0 0 250 250">
-                        <circle cx="125" cy="125" r="100" fill="#f0f0f0"/>
-                        <circle id="progressCircle" cx="125" cy="125" r="100"
+                        <circle class="ring-base" cx="125" cy="125" r="100"/>
+                        <circle id="progressCircle" class="ring-progress" cx="125" cy="125" r="100"
                                 fill="none"
                                 stroke="url(#gradient)"
                                 stroke-width="50"
@@ -65,8 +71,8 @@
                                 style="transition: stroke-dasharray 0.5s ease"/>
                         <defs>
                             <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                <stop offset="0%" style="stop-color:var(--color-ring-start);stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:var(--color-ring-end);stop-opacity:1" />
                             </linearGradient>
                         </defs>
                     </svg>

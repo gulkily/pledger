@@ -4,12 +4,102 @@
     box-sizing: border-box;
 }
 
+:root {
+    color-scheme: light;
+    --color-bg: #f6f8fa;
+    --color-surface: #ffffff;
+    --color-border: #d0d7de;
+    --color-border-soft: #eaeef2;
+    --color-shadow: 0 1px 0 rgba(27, 31, 36, 0.04);
+    --color-text: #1f2328;
+    --color-text-subtle: #57606a;
+    --color-accent: #0969da;
+    --color-accent-soft: #ddf4ff;
+    --color-accent-soft-border: rgba(9, 105, 218, 0.2);
+    --color-success-soft: rgba(46, 164, 79, 0.16);
+    --color-success-text: #2ea043;
+    --color-error-soft: rgba(249, 109, 98, 0.18);
+    --color-error-text: #f85149;
+    --color-banner-bg: #ddf4ff;
+    --color-banner-text: #0550ae;
+    --color-banner-border: rgba(9, 105, 218, 0.2);
+    --color-ring-start: #7c83ff;
+    --color-ring-end: #9a86ff;
+    --color-ring-base: #e4e9ef;
+    --color-btn-primary-start: #218bff;
+    --color-btn-primary-end: #1f6feb;
+    --color-btn-primary-text: #ffffff;
+    --color-delete-bg: rgba(249, 109, 98, 0.12);
+    --color-delete-text: #f85149;
+}
+
+:root[data-theme='dark'] {
+    color-scheme: dark;
+    --color-bg: #0d1117;
+    --color-surface: #161b22;
+    --color-border: #30363d;
+    --color-border-soft: #21262d;
+    --color-shadow: 0 0 0 1px rgba(1, 4, 9, 0.7);
+    --color-text: #f0f6fc;
+    --color-text-subtle: #8b949e;
+    --color-accent: #58a6ff;
+    --color-accent-soft: rgba(56, 139, 253, 0.16);
+    --color-accent-soft-border: rgba(56, 139, 253, 0.35);
+    --color-success-soft: rgba(46, 164, 79, 0.24);
+    --color-success-text: #56d364;
+    --color-error-soft: rgba(248, 81, 73, 0.24);
+    --color-error-text: #ff7b72;
+    --color-banner-bg: rgba(56, 139, 253, 0.16);
+    --color-banner-text: #79c0ff;
+    --color-banner-border: rgba(56, 139, 253, 0.35);
+    --color-ring-start: #58a6ff;
+    --color-ring-end: #9a86ff;
+    --color-ring-base: #21262d;
+    --color-btn-primary-start: #238636;
+    --color-btn-primary-end: #2ea043;
+    --color-btn-primary-text: #ffffff;
+    --color-delete-bg: rgba(248, 81, 73, 0.18);
+    --color-delete-text: #ff7b72;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        color-scheme: dark;
+        --color-bg: #0d1117;
+        --color-surface: #161b22;
+        --color-border: #30363d;
+        --color-border-soft: #21262d;
+        --color-shadow: 0 0 0 1px rgba(1, 4, 9, 0.7);
+        --color-text: #f0f6fc;
+        --color-text-subtle: #8b949e;
+        --color-accent: #58a6ff;
+        --color-accent-soft: rgba(56, 139, 253, 0.16);
+        --color-accent-soft-border: rgba(56, 139, 253, 0.35);
+        --color-success-soft: rgba(46, 164, 79, 0.24);
+        --color-success-text: #56d364;
+        --color-error-soft: rgba(248, 81, 73, 0.24);
+        --color-error-text: #ff7b72;
+        --color-banner-bg: rgba(56, 139, 253, 0.16);
+        --color-banner-text: #79c0ff;
+        --color-banner-border: rgba(56, 139, 253, 0.35);
+        --color-ring-start: #58a6ff;
+        --color-ring-end: #9a86ff;
+        --color-ring-base: #21262d;
+        --color-btn-primary-start: #238636;
+        --color-btn-primary-end: #2ea043;
+        --color-btn-primary-text: #ffffff;
+        --color-delete-bg: rgba(248, 81, 73, 0.18);
+        --color-delete-text: #ff7b72;
+    }
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background: var(--color-bg);
     min-height: 100vh;
     padding: 32px 20px;
     color: var(--color-text);
+    transition: background 0.25s ease, color 0.25s ease;
 }
 
 a {
@@ -48,10 +138,49 @@ a {
     object-fit: cover;
 }
 
-.hero-content h1 {
+.hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.hero-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hero-header h1 {
+    flex: 1;
     margin: 0;
     font-size: 1.9em;
     color: var(--color-text);
+}
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text-subtle);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+    color: var(--color-text);
+    border-color: var(--color-accent);
+}
+
+.theme-toggle span {
+    display: inline-flex;
+    align-items: center;
 }
 
 .hero-tagline {
@@ -65,30 +194,30 @@ a {
 }
 
 .countdown {
-    background: #ffffff;
-    border: 1px solid #d0d7de;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 12px;
     padding: 16px 20px;
     margin-bottom: 24px;
     text-align: center;
-    color: #24292f;
+    color: var(--color-text);
     font-size: 1.05em;
-    box-shadow: 0 1px 0 rgba(27, 31, 36, 0.04);
+    box-shadow: var(--color-shadow);
 }
 
 .countdown strong {
     font-size: 1.35em;
     display: block;
     margin-top: 4px;
-    color: #1f2328;
+    color: var(--color-text);
 }
 
 .card {
-    background: #ffffff;
+    background: var(--color-surface);
     border-radius: 12px;
     padding: 28px 30px;
-    border: 1px solid #d0d7de;
-    box-shadow: 0 1px 0 rgba(27, 31, 36, 0.04);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--color-shadow);
     margin-bottom: 24px;
 }
 
@@ -131,14 +260,23 @@ a {
     transform: rotate(-90deg);
 }
 
+.pie-chart .ring-base {
+    fill: var(--color-ring-base);
+    transition: fill 0.25s ease;
+}
+
+.pie-chart .ring-progress {
+    stroke-linecap: round;
+}
+
 .chart-info {
     flex: 1;
     min-width: 250px;
 }
 
 .supporter-banner {
-    background: #ddf4ff;
-    color: #0550ae;
+    background: var(--color-banner-bg);
+    color: var(--color-banner-text);
     font-weight: 600;
     padding: 10px 14px;
     border-radius: 999px;
@@ -146,30 +284,30 @@ a {
     align-items: center;
     gap: 8px;
     margin-bottom: 16px;
-    border: 1px solid rgba(9, 105, 218, 0.2);
+    border: 1px solid var(--color-banner-border);
 }
 
 .progress-text {
     font-size: 2em;
     font-weight: 700;
-    color: #1f2328;
+    color: var(--color-text);
     margin-bottom: 10px;
 }
 
 .progress-subtext {
     font-size: 1em;
-    color: #57606a;
+    color: var(--color-text-subtle);
     margin-bottom: 10px;
 }
 
 .normalization-note {
     font-size: 0.9em;
-    color: #0550ae;
-    background: #ddf4ff;
+    color: var(--color-banner-text);
+    background: var(--color-banner-bg);
     padding: 10px 12px;
     border-radius: 6px;
     margin-bottom: 20px;
-    border: 1px solid rgba(9, 105, 218, 0.2);
+    border: 1px solid var(--color-banner-border);
 }
 
 .normalization-note[hidden] {
@@ -195,7 +333,7 @@ a {
     display: flex;
     justify-content: space-between;
     padding: 8px 0;
-    border-bottom: 1px solid rgba(208, 215, 222, 0.6);
+    border-bottom: 1px solid var(--color-border-soft);
 }
 
 .sponsor-item:last-child {
@@ -242,12 +380,12 @@ a {
 }
 
 .manage-section {
-    background: #ffffff;
+    background: var(--color-surface);
     border-radius: 12px;
     padding: 24px 28px;
     margin-top: 24px;
-    border: 1px solid #d0d7de;
-    box-shadow: 0 1px 0 rgba(27, 31, 36, 0.04);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--color-shadow);
 }
 
 .manage-section h2 {
@@ -516,49 +654,15 @@ a {
 }
 
 @media (max-width: 600px) {
-    .header h1 {
+    .hero-content h1 {
         font-size: 1.8em;
     }
-    
+
     .chart-container {
         flex-direction: column;
     }
-    
+
     .pie-chart {
         margin: 0 auto;
     }
-}
- :root {
-    color-scheme: light;
-    --color-bg: #f6f8fa;
-    --color-surface: #ffffff;
-    --color-border: #d0d7de;
-    --color-shadow: 0 1px 0 rgba(27, 31, 36, 0.04);
-    --color-text: #1f2328;
-    --color-text-subtle: #57606a;
-    --color-accent: #0969da;
-    --color-accent-soft: #ddf4ff;
-    --color-accent-soft-border: rgba(9, 105, 218, 0.2);
-    --color-success-soft: rgba(46, 164, 79, 0.16);
-    --color-success-text: #2ea043;
-    --color-error-soft: rgba(249, 109, 98, 0.18);
-    --color-error-text: #f85149;
-    --color-banner-bg: #ddf4ff;
-    --color-banner-text: #0550ae;
-    --color-banner-border: rgba(9, 105, 218, 0.2);
-    --color-ring-start: #7c83ff;
-    --color-ring-end: #9a86ff;
-    --color-btn-primary-start: #218bff;
-    --color-btn-primary-end: #1f6feb;
-    --color-btn-primary-text: #ffffff;
-    --color-delete-bg: rgba(249, 109, 98, 0.12);
-    --color-delete-text: #f85149;
-}
-
-
-.hero-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
 }
