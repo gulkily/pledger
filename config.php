@@ -2,7 +2,8 @@
 // config.php - Simple admin page to manage configuration
 // In production, you'd want to add authentication here
 
-$db = new SQLite3('pledges.db');
+$config = require __DIR__ . '/config/app.php';
+$db = new SQLite3($config['db_path']);
 $result = $db->query('SELECT key, value FROM config');
 
 $config = [];

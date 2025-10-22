@@ -5,7 +5,8 @@ header('Content-Type: text/html; charset=utf-8');
 
 echo "<h1>Database Debug Information</h1>";
 
-$db_file = 'pledges.db';
+$config = require __DIR__ . '/config/app.php';
+$db_file = $config['db_path'];
 
 // Check if file exists
 echo "<h2>File Check</h2>";

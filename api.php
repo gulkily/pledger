@@ -12,7 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Database setup
-$db_file = 'pledges.db';
+$config = require __DIR__ . '/config/app.php';
+$db_file = $config['db_path'];
 $db = new SQLite3($db_file);
 
 // Create tables if they don't exist
