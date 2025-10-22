@@ -8,9 +8,15 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🚀 Co-fund research for healthier online communities</h1>
-            <p>I’m heading to GitHub Universe to advance community infrastructure research—and I’d love you to co-own the learning.</p>
+        <div class="hero">
+            <div class="hero-avatar">
+                <img src="image/1530699.jpeg" alt="Ilya Gulko">
+            </div>
+            <div class="hero-content">
+                <h1>Co-fund research for healthier online communities</h1>
+                <p class="hero-tagline">I’m heading to GitHub Universe to advance community infrastructure research—and I’d love you to co-own the learning.</p>
+                <p class="hero-subtext">Your pledge lightens a single sponsor’s load and keeps the insights we uncover open to everyone.</p>
+            </div>
         </div>
 
         <div class="story-card">
