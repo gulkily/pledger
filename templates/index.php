@@ -161,6 +161,10 @@
                 <p>Not this time. This sprint is deliberately lightweight and last-minute, so once we hit 100% I’ll reach out personally with a payment link or transfer instructions. Think of it as a manually orchestrated experiment rather than a SaaS flow.</p>
             </div>
             <div class="faq-item">
+                <h3>What if my situation changes?</h3>
+                <p>This is a trust-based collaboration. If life shifts—expenses pop up, you get cold feet, or the final number feels heavy—let me know. I won’t auto-charge or chase anyone; we’ll adjust the pledge or hand it back to the anchor sponsor.</p>
+            </div>
+            <div class="faq-item">
                 <h3>What happens to the anchor sponsor?</h3>
                 <p>Your pledges reduce what they cover. If we go beyond 100%, they scale back and we collectively decide how to reinvest the surplus.</p>
             </div>
