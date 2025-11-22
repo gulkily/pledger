@@ -2,7 +2,7 @@
 
 $projectRoot = dirname(__DIR__);
 $causeDir = __DIR__ . '/causes';
-$defaultSlug = 'github-universe-trip';
+$defaultSlug = 'placeholder';
 
 $envSlug = getenv('PLEDGER_CAUSE');
 $selectorFile = __DIR__ . '/current_cause.php';
