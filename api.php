@@ -7,14 +7,20 @@ header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, X-Pledger-Session');
 
 // Handle preflight requests
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'OPTIONS') {
     exit(0);
 }
 
 // Database setup
-$config = require __DIR__ . '/config/app.php';
-$db_file = $config['db_path'];
-$db = new SQLite3($db_file);
+$appConfig = require __DIR__ . '/config/app.php';
+$db_file = $appConfig['db_path'];
+ensureDatabasePath($db_file);
+
+try {
+    $db = new SQLite3($db_file);
+} catch (Exception $e) {
+    respondWithFatalError('Failed to open database for cause: ' . $e->getMessage());
+}
 
 // Create tables if they don't exist
 $db->exec('
@@ -68,10 +74,21 @@ $db->exec('
 
 // Initialize default config if empty
 $config_count = $db->querySingle('SELECT COUNT(*) FROM config');
+$defaultMinPrice = $appConfig['price_range']['min'] ?? 300;
+$defaultMaxPrice = $appConfig['price_range']['max'] ?? 600;
+$defaultDeadline = $appConfig['deadline'] ?? '2025-10-23';
 if ($config_count == 0) {
-    $db->exec("INSERT INTO config (key, value) VALUES ('min_price', '300')");
-    $db->exec("INSERT INTO config (key, value) VALUES ('max_price', '600')");
-    $db->exec("INSERT INTO config (key, value) VALUES ('deadline', '2025-10-23')");
+    $stmt = $db->prepare('INSERT INTO config (key, value) VALUES (:key, :value)');
+    foreach ([
+        'min_price' => $defaultMinPrice,
+        'max_price' => $defaultMaxPrice,
+        'deadline' => $defaultDeadline,
+    ] as $key => $value) {
+        $stmt->reset();
+        $stmt->bindValue(':key', $key, SQLITE3_TEXT);
+        $stmt->bindValue(':value', (string) $value, SQLITE3_TEXT);
+        $stmt->execute();
+    }
 }
 
 // Route handling
@@ -89,7 +106,7 @@ switch ($action) {
         break;
 
     case 'get_config':
-        getConfig($db, $sessionToken);
+        getConfig($db, $sessionToken, $appConfig);
         break;
 
     case 'update_config':
@@ -180,17 +197,19 @@ function addPledge($db, $sessionToken) {
     }
 }
 
-function getConfig($db, $sessionToken) {
-    $result = $db->query('SELECT key, value FROM config');
-    
-    $config = [];
-    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-        $config[$row['key']] = $row['value'];
-    }
-    
+function getConfig($db, $sessionToken, $appConfig) {
+    $configRows = loadRuntimeConfig($db);
+
+    $payloadConfig = [
+        'min_price' => isset($configRows['min_price']) ? (int) $configRows['min_price'] : ($appConfig['price_range']['min'] ?? null),
+        'max_price' => isset($configRows['max_price']) ? (int) $configRows['max_price'] : ($appConfig['price_range']['max'] ?? null),
+        'deadline' => $configRows['deadline'] ?? ($appConfig['deadline'] ?? null),
+    ];
+
     echo json_encode([
         'success' => true,
-        'config' => $config,
+        'config' => $payloadConfig,
+        'cause' => buildCauseMetadata($appConfig, $payloadConfig),
         'session_token' => $sessionToken
     ]);
 }
@@ -307,6 +326,39 @@ function updateConfig($db) {
     
     echo json_encode(['success' => true, 'message' => 'Config updated']);
 }
+
+function loadRuntimeConfig($db) {
+    $result = $db->query('SELECT key, value FROM config');
+    $config = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        if (!isset($row['key'])) {
+            continue;
+        }
+        $config[$row['key']] = $row['value'] ?? null;
+    }
+    return $config;
+}
+
+function buildCauseMetadata($appConfig, array $payloadConfig = []) {
+    $priceRange = $appConfig['price_range'] ?? [];
+    if (isset($payloadConfig['min_price'])) {
+        $priceRange['min'] = $payloadConfig['min_price'];
+    }
+    if (isset($payloadConfig['max_price'])) {
+        $priceRange['max'] = $payloadConfig['max_price'];
+    }
+
+    return [
+        'slug' => $appConfig['cause_slug'] ?? ($appConfig['slug'] ?? null),
+        'display_name' => $appConfig['display_name'] ?? '',
+        'goal_banner' => $appConfig['goal_banner'] ?? '',
+        'deadline' => $payloadConfig['deadline'] ?? ($appConfig['deadline'] ?? null),
+        'hero' => $appConfig['hero'] ?? [],
+        'story' => $appConfig['story'] ?? [],
+        'price_range' => $priceRange,
+        'research_projects' => $appConfig['research_projects'] ?? [],
+    ];
+}
 function ensureSession($db) {
     $cookieName = 'pledger_session';
     $cookieToken = $_COOKIE[$cookieName] ?? '';
@@ -385,6 +437,32 @@ function fetchPledgeById($db, $pledgeId) {
     $stmt->bindValue(':id', $pledgeId, SQLITE3_INTEGER);
     $result = $stmt->execute();
     return $result ? $result->fetchArray(SQLITE3_ASSOC) : false;
+}
+
+function ensureDatabasePath($dbPath) {
+    $dir = dirname($dbPath);
+    if (!is_dir($dir)) {
+        if (!mkdir($dir, 0775, true)) {
+            respondWithFatalError('Unable to create directory for pledge database');
+        }
+    }
+
+    if (!is_writable($dir)) {
+        respondWithFatalError('Pledge database directory is not writable: ' . $dir);
+    }
+
+    if (file_exists($dbPath) && !is_writable($dbPath)) {
+        respondWithFatalError('Pledge database file is not writable: ' . $dbPath);
+    }
+}
+
+function respondWithFatalError($message, $statusCode = 500) {
+    http_response_code($statusCode);
+    echo json_encode([
+        'success' => false,
+        'error' => $message,
+    ]);
+    exit;
 }
 $db->close();
 ?>

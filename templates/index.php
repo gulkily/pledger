@@ -7,95 +7,115 @@
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
+<?php
+$heroConfig = $causeConfig['hero'] ?? [];
+$heroAvatar = $heroConfig['avatar'] ?? [];
+$storyConfig = $causeConfig['story'] ?? [];
+$storyParagraphs = $storyConfig['why_it_matters'] ?? [];
+$storyExplore = $storyConfig['explore'] ?? [];
+$researchProjects = $causeConfig['research_projects'] ?? [];
+$goalBanner = $causeConfig['goal_banner'] ?? '';
+$priceRange = $causeConfig['price_range'] ?? [];
+$priceMin = isset($priceRange['min']) ? (int) $priceRange['min'] : null;
+$priceMax = isset($priceRange['max']) ? (int) $priceRange['max'] : null;
+$priceDescription = $priceRange['description'] ?? 'Estimated cost';
+$deadline = $causeConfig['deadline'] ?? '';
+$deadlineDisplay = 'Loading...';
+if (!empty($deadline)) {
+    $deadlineDate = DateTime::createFromFormat('Y-m-d', $deadline, new DateTimeZone('UTC'));
+    if ($deadlineDate instanceof DateTime) {
+        $deadlineDisplay = $deadlineDate->format('F j, Y');
+    } else {
+        $deadlineDisplay = $deadline;
+    }
+} else {
+    $deadlineDisplay = 'Flexible';
+}
+$clientCausePayload = [
+    'slug' => $causeConfig['cause_slug'] ?? ($causeConfig['slug'] ?? ''),
+    'display_name' => $causeConfig['display_name'] ?? '',
+    'goal_banner' => $goalBanner,
+    'deadline' => $deadline,
+    'hero' => $heroConfig,
+    'story' => $storyConfig,
+    'price_range' => $priceRange,
+    'research_projects' => $researchProjects,
+];
+$clientInitialConfig = [
+    'min_price' => $priceMin,
+    'max_price' => $priceMax,
+    'deadline' => $deadline,
+];
+?>
     <div class="container">
         <div class="hero">
             <div class="hero-avatar">
-                <a href="https://github.com/gulkily" target="_blank" rel="noreferrer"><img src="image/1530699.jpeg" alt="Ilya Gulko"></a>
+                <a id="heroAvatarLink" href="<?php echo htmlspecialchars($heroAvatar['link'] ?? '#'); ?>" target="_blank" rel="noreferrer">
+                    <img id="heroAvatarImage" src="<?php echo htmlspecialchars($heroAvatar['src'] ?? 'image/1530699.jpeg'); ?>" alt="<?php echo htmlspecialchars($heroAvatar['alt'] ?? 'Campaign lead'); ?>">
+                </a>
             </div>
             <div class="hero-content">
                 <div class="hero-header">
-                    <h1>Co-fund research for healthier online communities</h1>
+                    <h1 id="heroHeadline"><?php echo htmlspecialchars($heroConfig['headline'] ?? 'Co-fund research for healthier online communities'); ?></h1>
                     <button type="button" id="themeToggle" class="theme-toggle" aria-label="Toggle color theme" data-theme-state="auto">
                         <span id="themeToggleIcon">🌓</span>
                         <span id="themeToggleLabel">Auto</span>
                     </button>
                 </div>
-                <p class="hero-tagline">I’m heading to <a href="https://githubuniverse.com/">GitHub Universe</a> to advance community infrastructure research—and I’d love you to co-own the learning.</p>
-                <p class="hero-subtext">Your pledge lightens a single sponsor’s load and keeps the insights we uncover open to everyone.</p>
+                <p class="hero-tagline" id="heroTagline"><?php echo $heroConfig['tagline'] ?? 'Help co-fund research and keep the insights open to everyone.'; ?></p>
+                <p class="hero-subtext" id="heroSubtext"><?php echo htmlspecialchars($heroConfig['subtext'] ?? 'Your pledge lightens a single sponsor’s load and keeps the insights we uncover open to everyone.'); ?></p>
             </div>
         </div>
 
         <div class="story-card">
             <h2>Why this trip matters</h2>
-            <p>
-                My current work is laser-focused on open source infrastructure that keeps online communities healthy:
-                humane moderation tooling, participation rituals that feel welcoming, and spaces where belonging doesn’t
-                require performance. GitHub Universe is where I can pressure-test those ideas with other people building in
-                the same direction.
-            </p>
-            <p>
-                An existing collaborator already offered to pay for the flight, but I’d rather distribute both the risk and
-                the breakthroughs. When the community co-invests, the insights belong to everyone—not just the person who
-                can underwrite a plane ticket.
-            </p>
-            <p>
-                This pledge drive is an experiment in community-supported research: you pledge a percentage today, I only
-                collect if/when we book, and you receive first access to conference notes, prototypes, and rituals that come
-                out of the trip. Your downside is zero; your upside is direct influence on OSS community tooling.
-            </p>
-            <p>
-                You’ll be able to edit or cancel your pledge later from this browser—keep the tab bookmarked and the session
-                remembers you for future supporter-only experiments.
-            </p>
-            <p>
-                Booking deadline is tight, and every percentage pledged today lightens the anchor sponsor’s load. Thank you
-                for backing meaningful, community-focused FOSS research.
-            </p>
+            <div id="storyWhy">
+                <?php if (!empty($storyParagraphs)): ?>
+                    <?php foreach ($storyParagraphs as $paragraph): ?>
+                        <p><?php echo htmlspecialchars($paragraph); ?></p>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Support this work to keep open-source community research accountable to its supporters.</p>
+                <?php endif; ?>
+            </div>
             <div class="story-explore">
-                <h3>What I’m exploring</h3>
-                <ul>
-                    <li>Designing consent-first social spaces where people control their identity, data, and moderation tools.</li>
-                    <li>Building mutual-support tooling that respects context—whether a prayer circle or any community that cares for its members.</li>
-                    <li>Experimenting with human-guided AI helpers that stay portable, auditable, and grounded in community intent.</li>
+                <h3 id="storyExploreHeading"><?php echo htmlspecialchars($storyExplore['heading'] ?? 'What I’m exploring'); ?></h3>
+                <ul id="storyExploreList">
+                    <?php if (!empty($storyExplore['items'])): ?>
+                        <?php foreach ($storyExplore['items'] as $item): ?>
+                            <li><?php echo htmlspecialchars($item); ?></li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <li>New exploration topics coming soon.</li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
 
         <div class="research-card">
             <h2>Current experiments</h2>
-            <ul class="research-list">
-                <li>
-                    <span class="research-title">Pollyanna</span>
-                    <span class="research-tags">
-                        <span>#consent-first</span>
-                        <span>#accessibility</span>
-                    </span>
-                    <p>Framework for resilient online communities that keeps identities portable, content verifiable, and access universal.</p>
-                </li>
-                <li>
-                    <span class="research-title">PrayerLift / ThyWill</span>
-                    <span class="research-tags">
-                        <span>#mutual-care</span>
-                        <span>#ai-assistive</span>
-                    </span>
-                    <p>Respectful AI-generated responses for support networks—useful case studies for any group practicing empathic check-ins.</p>
-                </li>
-                <li>
-                    <span class="research-title">Prayer Record Text Format</span>
-                    <span class="research-tags">
-                        <span>#portable-data</span>
-                        <span>#community-archives</span>
-                    </span>
-                    <p>Human-readable, git-friendly specification for tracking support activity so communities can own their history.</p>
-                </li>
-                <li>
-                    <span class="research-title">ARKOS (contributor)</span>
-                    <span class="research-tags">
-                        <span>#local-llm</span>
-                        <span>#memory</span>
-                    </span>
-                    <p>Interface for locally hosted, memory-augmented AI agents—informing how we keep automated helpers accountable to users.</p>
-                </li>
+            <ul class="research-list" id="researchList">
+                <?php if (!empty($researchProjects)): ?>
+                    <?php foreach ($researchProjects as $project): ?>
+                        <li>
+                            <span class="research-title"><?php echo htmlspecialchars($project['title'] ?? ''); ?></span>
+                            <?php if (!empty($project['tags']) && is_array($project['tags'])): ?>
+                                <span class="research-tags">
+                                    <?php foreach ($project['tags'] as $tag): ?>
+                                        <span><?php echo htmlspecialchars($tag); ?></span>
+                                    <?php endforeach; ?>
+                                </span>
+                            <?php endif; ?>
+                            <?php if (!empty($project['description'])): ?>
+                                <p><?php echo htmlspecialchars($project['description']); ?></p>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <li>
+                        <span class="research-title">New experiments coming soon</span>
+                    </li>
+                <?php endif; ?>
             </ul>
             <p class="research-links">Want to dive deeper? Explore the projects on <a href="https://github.com/gulkily" target="_blank" rel="noreferrer">GitHub</a> or reach out for collaboration notes.</p>
         </div>
@@ -103,7 +123,7 @@
         <a class="btn mobile-cta" href="#pledgeForm">Commit My Pledge</a>
 
         <div class="countdown">
-            Need to book by: <strong id="deadline">Loading...</strong>
+            Need to book by: <strong id="deadline"><?php echo htmlspecialchars($deadlineDisplay); ?></strong>
             <div id="timeLeft"></div>
         </div>
 
@@ -128,8 +148,8 @@
                 </div>
 
                 <div class="chart-info">
-                    <div class="supporter-banner">
-                        Community goal: shift the anchor sponsor’s share from 100% to 40% so everyone co-owns the outcome.
+                    <div class="supporter-banner" id="goalBanner">
+                        <?php echo htmlspecialchars($goalBanner ?: 'Community goal: lighten the anchor sponsor’s load together.'); ?>
                     </div>
                     <div class="progress-text">
                         <span id="displayPercent">0</span>% of commitments
@@ -141,7 +161,12 @@
                         When commitments climb past 100%, the chart shows each pledge’s share so we can see how the community carries the load.
                     </p>
                     <div class="price-range" id="priceRange">
-                        Estimated flight cost: <strong>Loading...</strong>
+                        <?php if ($priceMin !== null && $priceMax !== null): ?>
+                            <?php echo htmlspecialchars($priceDescription); ?>:
+                            <strong>$<?php echo number_format($priceMin); ?> - $<?php echo number_format($priceMax); ?></strong>
+                        <?php else: ?>
+                            <?php echo htmlspecialchars($priceDescription); ?>: <strong>Loading...</strong>
+                        <?php endif; ?>
                     </div>
                     <div class="sponsors-list" id="sponsorsList">
                         <p style="color: #999; text-align: center;">Loading pledges...</p>
@@ -234,7 +259,9 @@
 
     <script>
         window.APP_CONFIG = {
-            apiUrl: <?php echo json_encode($apiUrl); ?>
+            apiUrl: <?php echo json_encode($apiUrl); ?>,
+            cause: <?php echo json_encode($clientCausePayload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>,
+            initialConfig: <?php echo json_encode($clientInitialConfig, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>
         };
     </script>
     <script src="assets/js/app.js"></script>

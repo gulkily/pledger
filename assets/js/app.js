@@ -1,12 +1,19 @@
 // Configuration - loaded from backend
 const APP_CONFIG = window.APP_CONFIG || {};
 const API_BASE_URL = APP_CONFIG.apiUrl || 'api.php';
+const serverInitialConfig = (APP_CONFIG.initialConfig && typeof APP_CONFIG.initialConfig === 'object')
+    ? APP_CONFIG.initialConfig
+    : {};
+const serverCauseContent = (APP_CONFIG.cause && typeof APP_CONFIG.cause === 'object')
+    ? APP_CONFIG.cause
+    : null;
 
 let config = {
-    minPrice: 300,
-    maxPrice: 600,
-    deadline: '2025-10-23'
+    minPrice: coerceNumber(serverInitialConfig.min_price, 300),
+    maxPrice: coerceNumber(serverInitialConfig.max_price, 600),
+    deadline: serverInitialConfig.deadline || '2025-10-23'
 };
+let causeContent = serverCauseContent;
 
 let pledges = [];
 let pledgeState = {
@@ -92,6 +99,196 @@ function withSessionOptions(options = {}) {
     }
     merged.headers = headers;
     return merged;
+}
+
+function setTextContent(id, value, { fallback } = {}) {
+    const node = document.getElementById(id);
+    if (!node) {
+        return;
+    }
+    if (value !== undefined && value !== null && value !== '') {
+        node.textContent = value;
+    } else if (fallback) {
+        node.textContent = fallback;
+    }
+}
+
+function setHtmlContent(id, value, { fallback } = {}) {
+    const node = document.getElementById(id);
+    if (!node) {
+        return;
+    }
+    if (value) {
+        node.innerHTML = value;
+    } else if (fallback) {
+        node.innerHTML = fallback;
+    }
+}
+
+function renderParagraphs(containerId, paragraphs) {
+    if (!Array.isArray(paragraphs) || paragraphs.length === 0) {
+        return;
+    }
+    const container = document.getElementById(containerId);
+    if (!container) {
+        return;
+    }
+    container.innerHTML = '';
+    paragraphs.forEach(text => {
+        const paragraph = document.createElement('p');
+        paragraph.textContent = text;
+        container.appendChild(paragraph);
+    });
+}
+
+function renderSimpleList(containerId, items) {
+    if (!Array.isArray(items) || items.length === 0) {
+        return;
+    }
+    const container = document.getElementById(containerId);
+    if (!container) {
+        return;
+    }
+    container.innerHTML = '';
+    items.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        container.appendChild(li);
+    });
+}
+
+function renderResearchProjects(containerId, projects) {
+    const container = document.getElementById(containerId);
+    if (!container || !Array.isArray(projects)) {
+        return;
+    }
+    container.innerHTML = '';
+
+    if (projects.length === 0) {
+        const li = document.createElement('li');
+        const title = document.createElement('span');
+        title.className = 'research-title';
+        title.textContent = 'New experiments coming soon';
+        li.appendChild(title);
+        container.appendChild(li);
+        return;
+    }
+
+    projects.forEach(project => {
+        const li = document.createElement('li');
+
+        const title = document.createElement('span');
+        title.className = 'research-title';
+        title.textContent = project.title || 'New experiment';
+        li.appendChild(title);
+
+        if (Array.isArray(project.tags) && project.tags.length > 0) {
+            const tagsWrapper = document.createElement('span');
+            tagsWrapper.className = 'research-tags';
+            project.tags.forEach(tag => {
+                const tagEl = document.createElement('span');
+                tagEl.textContent = tag;
+                tagsWrapper.appendChild(tagEl);
+            });
+            li.appendChild(tagsWrapper);
+        }
+
+        if (project.description) {
+            const description = document.createElement('p');
+            description.textContent = project.description;
+            li.appendChild(description);
+        }
+
+        container.appendChild(li);
+    });
+}
+
+function updateHeroAvatar(avatar = {}) {
+    const link = document.getElementById('heroAvatarLink');
+    const img = document.getElementById('heroAvatarImage');
+    if (link && avatar.link) {
+        link.href = avatar.link;
+    }
+    if (img) {
+        if (avatar.src) {
+            img.src = avatar.src;
+        }
+        if (avatar.alt) {
+            img.alt = avatar.alt;
+        }
+    }
+}
+
+function renderPriceRange() {
+    const priceRangeEl = document.getElementById('priceRange');
+    if (!priceRangeEl) {
+        return;
+    }
+
+    const description = (causeContent && causeContent.price_range && causeContent.price_range.description)
+        ? causeContent.price_range.description
+        : 'Estimated cost';
+    const hasNumbers = Number.isFinite(config.minPrice) && Number.isFinite(config.maxPrice);
+
+    if (hasNumbers) {
+        priceRangeEl.textContent = description ? `${description}: ` : '';
+        const strong = document.createElement('strong');
+        strong.textContent = `$${Math.round(config.minPrice)} - $${Math.round(config.maxPrice)}`;
+        priceRangeEl.appendChild(strong);
+    } else {
+        priceRangeEl.textContent = description ? `${description}: Loading...` : 'Loading...';
+    }
+}
+
+function updateDeadlineText() {
+    const deadlineEl = document.getElementById('deadline');
+    if (!deadlineEl) {
+        return;
+    }
+    if (!config.deadline) {
+        deadlineEl.textContent = 'Flexible';
+        return;
+    }
+    const deadlineDate = parseLocalDate(config.deadline);
+    if (deadlineDate instanceof Date && !Number.isNaN(deadlineDate.valueOf())) {
+        deadlineEl.textContent = deadlineDate.toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric'
+        });
+    } else {
+        deadlineEl.textContent = config.deadline;
+    }
+}
+
+function renderCauseContent() {
+    if (!causeContent) {
+        renderPriceRange();
+        return;
+    }
+    const hero = (causeContent.hero && typeof causeContent.hero === 'object') ? causeContent.hero : {};
+    setTextContent('heroHeadline', hero.headline);
+    setHtmlContent('heroTagline', hero.tagline);
+    setTextContent('heroSubtext', hero.subtext);
+    updateHeroAvatar(hero.avatar || {});
+    setTextContent('goalBanner', causeContent.goal_banner, { fallback: '' });
+
+    const story = (causeContent.story && typeof causeContent.story === 'object') ? causeContent.story : {};
+    if (Array.isArray(story.why_it_matters)) {
+        renderParagraphs('storyWhy', story.why_it_matters);
+    }
+    if (story.explore && typeof story.explore === 'object') {
+        setTextContent('storyExploreHeading', story.explore.heading, { fallback: 'What we are exploring' });
+        if (Array.isArray(story.explore.items)) {
+            renderSimpleList('storyExploreList', story.explore.items);
+        }
+    }
+
+    if (Array.isArray(causeContent.research_projects)) {
+        renderResearchProjects('researchList', causeContent.research_projects);
+    }
+
+    renderPriceRange();
 }
 
 initTheme();
@@ -201,6 +398,11 @@ function parseLocalDate(value) {
     return new Date(value);
 }
 
+function coerceNumber(value, fallback) {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : fallback;
+}
+
 function apiUrl(action) {
     const url = new URL(API_BASE_URL, window.location.href);
     url.searchParams.set('action', action);
@@ -215,25 +417,26 @@ async function loadConfig() {
         const data = await response.json();
 
         if (data.success) {
-            config.minPrice = parseInt(data.config.min_price, 10);
-            config.maxPrice = parseInt(data.config.max_price, 10);
-            config.deadline = data.config.deadline;
+            const remoteConfig = data.config || {};
+            if (remoteConfig.min_price !== undefined) {
+                config.minPrice = coerceNumber(remoteConfig.min_price, config.minPrice);
+            }
+            if (remoteConfig.max_price !== undefined) {
+                config.maxPrice = coerceNumber(remoteConfig.max_price, config.maxPrice);
+            }
+            if (remoteConfig.deadline) {
+                config.deadline = remoteConfig.deadline;
+            }
 
             persistSessionToken(data.session_token);
 
-            document.getElementById('priceRange').innerHTML =
-                `Estimated flight cost: <strong>$${config.minPrice} - $${config.maxPrice}</strong>`;
-            const deadlineDate = parseLocalDate(config.deadline);
-            if (deadlineDate instanceof Date && !Number.isNaN(deadlineDate.valueOf())) {
-                document.getElementById('deadline').textContent =
-                    deadlineDate.toLocaleDateString('en-US', {
-                        month: 'long',
-                        day: 'numeric',
-                        year: 'numeric'
-                    });
+            if (data.cause && typeof data.cause === 'object') {
+                causeContent = data.cause;
             }
 
+            updateDeadlineText();
             updateCountdown();
+            renderCauseContent();
         }
     } catch (error) {
         console.error('Error loading config:', error);
@@ -599,6 +802,9 @@ document.getElementById('pledgeForm').addEventListener('submit', async function 
 });
 
 // Initialize
+renderCauseContent();
+updateDeadlineText();
+updateCountdown();
 loadConfig();
 loadPledges();
 setInterval(updateCountdown, 60000);
